@@ -1,0 +1,67 @@
+name: bellman-ford
+version: '0.1.0.0'
+category: value
+author: Rune K. Svendsen
+maintainer: runesvend@gmail.com
+copyright: CC0
+license: BSD3
+homepage: https://github.com/runeksvendsen/bellman-ford#readme
+
+extra-source-files:
+- README.md
+
+default-extensions:
+- FlexibleContexts
+
+dependencies:
+- base >=4.7 && <5
+
+library:
+  source-dirs: src
+  ghc-options:
+  - -Wall
+  dependencies:
+  - protolude
+  - array
+  - mutable-containers  # Deque
+  - vector              # MVector
+  - impure-containers
+  - primitive
+  - hashable
+  - mtl
+  - transformers
+  - deepseq
+  exposed-modules:
+  - Data.Graph.BellmanFord
+  - Data.Graph.Cycle
+  - Data.Graph.Digraph
+  - Data.Graph.Edge
+  - Data.Graph.Orphans
+  - Data.Graph.Prelude
+  - Data.Graph.Util
+  - Data.Queue
+  - Data.Stack
+
+tests:
+  bellman-ford-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -Wall
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    - -fno-ignore-asserts
+    dependencies:
+    - bellman-ford
+    - primitive
+    - random-shuffle
+    - MonadRandom
+    - transformers
+    - hspec-expectations
+    - hspec-smallcheck
+    - smallcheck
+    - tasty-smallcheck
+    - tasty-quickcheck
+    - tasty
+    - random-shuffle
